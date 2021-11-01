@@ -8,7 +8,7 @@ class PostsTransformer implements Transformer
 {
     public function handle($data, $param = null)
     {
-        $tranformedData = $data->getCollection()->map( function (Post $post) {
+        $transformedData = $data->getCollection()->map( function (Post $post) {
 
             return [
                 'id' => $post['id'],
@@ -18,7 +18,7 @@ class PostsTransformer implements Transformer
             ];
         });
 
-        return $tranformedData->all();
+        return $transformedData->all();
     }
 
 }
