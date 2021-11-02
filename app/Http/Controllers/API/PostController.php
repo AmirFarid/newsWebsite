@@ -23,9 +23,8 @@ class PostController extends Controller
 
     public function index(Request $request){
 
+        $posts = $this->service->index()->paginate($request->per_page ??= 25);
 
-        $posts = FilterFacade::filter(Post::class,null,['search' => ['published' => true]] );
-        $posts = $posts->paginate($request->per_page ??= 25);
 
         return jResponse()
             ->transform(PostsTransformer::class, $posts, true)
@@ -40,14 +39,31 @@ class PostController extends Controller
         ]);
 
         $post = $this->service->create($request);
-        return jResponse()->setData(['id' => $post->id])->toJsonSuccess('با موفقیت ذخیره شد!');
+
+        return jResponse()->setData(['id' => $post->id])->toJsonSuccess('Post added successfully');
+    }
+
+    public function search(Request $request){
+        ApiValidator::validate($request,
+        [
+            'constraint' => 'required'
+        ]);
+
+        $posts = $this->service->search($request->constraint)->paginate($request->per_page ??= 25);
+
+        return jResponse()
+            ->transform(PostsTransformer::class, $posts, true)
+            ->toJson();
     }
 
 
     public function togglePublished(Post $post)
     {
-        $post->togglePublished();
-        return jResponse()->setData(['id' => $post->id])->toJsonSuccess('با موفقیت ذخیره شد!');
+        $message = $post->togglePublished();
+
+        return jResponse()
+            ->setData(['id' => $post->id])
+            ->toJsonSuccess($message.' successfully!');
     }
 
 
