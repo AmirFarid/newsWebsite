@@ -21,12 +21,15 @@ class Post extends Model
         return $this->published ? 'Activated' : 'Deactivated';
     }
 
+    function Categories(){
+        return $this->belongsTo(Category::class);
+    }
 
     function tags(){
         return $this->belongsToMany(Tag::class);
     }
 
-    function comment(){
+    function comments(){
         return $this->hasMany(Comment::class);
     }
 
