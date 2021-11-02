@@ -29,7 +29,8 @@
         },
         "files": [
             "app/Helper/helper.php",
-            "app/Services/Filter/helper.php"
+            "app/Services/Filter/helper.php",
+            "app/Services/helper.php"
         ]
     },
     "autoload-dev": {

@@ -17,6 +17,8 @@ class SortFacade implements Filterable
                     return SortGT::filter($model, $query, $value);
                 case 'GTDate':
                     return SortGTDate::filter($model, $query, $value);
+                case 'STDate':
+                    return SortSTDate::filter($model, $query, $value);
                 case 'GTorE':
                     return SortGTOrEqual::filter($model, $query, $value);
                 case 'ACS':
