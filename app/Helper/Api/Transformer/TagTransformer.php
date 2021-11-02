@@ -9,7 +9,9 @@ class TagTransformer implements Transformer
 
     public function handle($data, $param = null)
     {
-        $transformedData = $data->getCollection()->map( function (Tag $tag){
+//        dd($data);
+        $transformedData = $data->map( function (Tag $tag){
+
             return[
 
                 'id' => $tag['id'],

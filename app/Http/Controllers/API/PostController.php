@@ -23,6 +23,7 @@ class PostController extends Controller
 
     public function index(Request $request){
 
+
         $posts = FilterFacade::filter(Post::class,null,['search' => ['published' => true]] );
         $posts = $posts->paginate($request->per_page ??= 25);
 
@@ -39,7 +40,6 @@ class PostController extends Controller
         ]);
 
         $post = $this->service->create($request);
-
         return jResponse()->setData(['id' => $post->id])->toJsonSuccess('با موفقیت ذخیره شد!');
     }
 
@@ -49,6 +49,7 @@ class PostController extends Controller
         $post->togglePublished();
         return jResponse()->setData(['id' => $post->id])->toJsonSuccess('با موفقیت ذخیره شد!');
     }
+
 
 
 }

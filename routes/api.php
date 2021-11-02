@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\PostController;
+use App\Http\Controllers\API\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,7 @@ Route::group(['prefix' => 'auth'], function () {
 
 
 Route::get('salam', [PostController::class, 'index']);
+Route::get('salam2', [TagController::class, 'index']);
 
 Route::group(['middleware' => ['auth:api']], function () {
 

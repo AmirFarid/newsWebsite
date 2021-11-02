@@ -19,4 +19,9 @@ class Post extends Model
         return $this->save();
     }
 
+
+    function tags(){
+        return $this->belongsToMany(Tag::class);
+    }
+
 }

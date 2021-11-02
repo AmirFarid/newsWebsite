@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     protected $fillable = ['name'];
+
+    function Posts(){
+        return $this->belongsToMany(Post::class);
+    }
 }
