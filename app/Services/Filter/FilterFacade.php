@@ -14,7 +14,7 @@ class FilterFacade implements Filterable
 
             switch ($key){
                 case 'sort':
-                    return Sort::filter($model, $query, $value);
+                    return SortFacade::filter($model, $query, $value);
                 case 'search':
                     return Search::filter($model, $query, $value);
                 default:
