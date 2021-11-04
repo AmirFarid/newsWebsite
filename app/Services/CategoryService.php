@@ -16,7 +16,7 @@ class CategoryService
         return Category::firstOrCreate(
             $request->only('name'),
             [
-                'is_parent' => $request->parent_id ? true : false,
+                'is_parent' => $request->parent_id ? false : true,
                 'category_id' => $request->parent_id ? $request->parent_id : null,
             ]
         );
