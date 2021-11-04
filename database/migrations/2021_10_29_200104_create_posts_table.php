@@ -18,7 +18,8 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string("title")->unique();
             $table->text("content");
-            $table->boolean("published")->default(false);
+            $table->boolean("active")->default(false);
+            $table->string('mime_type')->nullable();
             $table->timestamp("publication_date")->default(DB::raw('CURRENT_TIMESTAMP'));;
             $table->timestamps();
         });
