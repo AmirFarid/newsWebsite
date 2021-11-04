@@ -26,7 +26,7 @@ class CategoryTransformer implements Transformer{
     private function handleChild($category){
 
         if ($category->is_parent){
-            return [ApiTransformer::transform(CategoryTransformer::class, $category->child())];
+            return [ApiTransformer::transform(CategoryTransformer::class, $category->child)];
         }
         return [];
 
