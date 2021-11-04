@@ -51,9 +51,28 @@ class TagController extends Controller
 
     }
 
-    public function assignTag(){
+    public function assignTag(Request $request, Post $post){
+        ApiValidator::validate($request,[
+            'tags_id' => 'required'
+        ]);
 
+        $this->service->assignTag($request,$post);
 
+        return jResponse()
+            ->toJsonSuccess('Tag assigned successfully');
+
+    }
+
+    public function unAssignTag(Request $request, Post $post){
+
+        ApiValidator::validate($request,[
+            'tags_id' => 'required'
+        ]);
+
+        $this->service->unAssignTag($request,$post);
+
+        return jResponse()
+            ->toJsonSuccess('Tag un-assigned successfully');
 
     }
 }
