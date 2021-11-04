@@ -22,7 +22,7 @@ class SlideService{
             $request->only('name'),
             [
                 'url' => $request->url,
-                'weight' =>
+                'weight' => $request->weight
             ]
         );
         $slide->image = $request->file('image');
