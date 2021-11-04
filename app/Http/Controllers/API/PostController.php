@@ -57,9 +57,9 @@ class PostController extends Controller
     }
 
 
-    public function togglePublished(Post $post)
+    public function toggleactive(Post $post)
     {
-        $message = $post->togglePublished();
+        $message = $post->toggleactive();
 
         return jResponse()
             ->setData(['id' => $post->id])

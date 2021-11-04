@@ -6,19 +6,19 @@ use http\Env\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 /**
- * @property bool published
+ * @property bool active
  */
 class Post extends Model
 {
-    protected $fillable = ['title', 'content', 'published', 'publication_date'];
-    public static $filterable = ['title', 'content', 'published', 'id','publication_date'];
+    protected $fillable = ['title', 'content', 'active', 'publication_date'];
+    public static $filterable = ['title', 'content', 'active', 'id','publication_date'];
 
 
-    public function togglePublished()
+    public function toggleactive()
     {
-        $this->published == true ? $this->published = false : $this->published = true;
+        $this->active == true ? $this->active = false : $this->active = true;
         $this->save();
-        return $this->published ? 'Activated' : 'Deactivated';
+        return $this->active ? 'Activated' : 'Deactivated';
     }
 
     function Categories(){
@@ -31,6 +31,10 @@ class Post extends Model
 
     function comments(){
         return $this->hasMany(Comment::class);
+    }
+
+    function multiMedias(){
+        return $this->hasMany(Multimedia::class);
     }
 
 }

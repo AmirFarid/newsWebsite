@@ -16,7 +16,8 @@ class PostsTransformer implements Transformer
                 'id' => $post['id'],
                 'text' => $post['content'],
                 'update_at' => $post['update_at'],
-                'tags' => ApiTransformer::transform(TagTransformer::class, $post->tags),
+                'tags' => [ApiTransformer::transform(TagTransformer::class, $post->tags)],
+                'media' => [ApiTransformer::transform(MultimediaTransformer::class, $post->multiMedias)],
                 'filterable_fields' => Post::$filterable
             ];
         });
