@@ -51,4 +51,23 @@ class CommentController extends Controller
 
     }
 
+    public function update(Request $request, Comment $comment){
+
+        $this->service->update($request,$comment);
+
+        return jResponse()
+            ->toJsonSuccess("Comment updated successfully");
+
+    }
+
+    public function delete(Comment $comment){
+
+        $comment->delete();
+
+        return jResponse()
+            ->toJsonSuccess("Comment deleted successfully");
+    }
+
+
+
 }

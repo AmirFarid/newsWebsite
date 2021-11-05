@@ -10,7 +10,7 @@ class Slider extends Model implements AttachableInterface
 {
     use PaperclipTrait;
 
-    protected $fillable = ['name' , 'url'];
+    protected $fillable = ['name' , 'link'];
 
     public function __construct(array $attributes = [])
     {

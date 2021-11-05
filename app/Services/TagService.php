@@ -11,6 +11,15 @@ use Illuminate\Http\Request;
 
 class TagService
 {
+
+    public function create(Request $request){
+
+        return Tag::firstOrCreate(
+            $request->only('name')
+        );
+
+    }
+
     public function getPostByTag(Request $request){
 
        return FilterFacade::filter(Post::class , Tag::findOrFail($request->id)->posts(),[

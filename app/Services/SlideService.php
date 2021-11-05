@@ -21,10 +21,10 @@ class SlideService{
         $slide = Slider::firstOrCreate(
             $request->only('name'),
             [
-                'url' => $request->url,
-                'weight' => $request->weight
+                'link' => $request->url,
             ]
         );
+
         $slide->image = $request->file('image');
         $slide->save();
 

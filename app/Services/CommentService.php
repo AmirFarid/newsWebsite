@@ -5,7 +5,7 @@ namespace App\Services;
 
 use App\Models\Comment;
 use App\Services\Filter\FilterFacade;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 
 class CommentService
 {
@@ -17,8 +17,9 @@ class CommentService
             [
                 'post_id' => $request->post_id,
                 'user_id' => $request->user_id,
+                'content' => $request->text,
                 'title' => $request->title,
-                'content' => $request->content
+
             ]
         );
 
@@ -29,6 +30,12 @@ class CommentService
     public function index(Request $request){
         return FilterFacade::
         filter(Comment::class,null,['search' => ['post_id' => $request->post_id]]);
+    }
+
+    public function update(Request $request, Comment $comment){
+
+        return $comment->update($request->only('content','title'));
+
     }
 
 }

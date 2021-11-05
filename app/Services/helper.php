@@ -11,7 +11,13 @@ function defaultFilter($model, $query){
     return FilterFacade::filter($model, $query, [
 
         'search' => ['active' => true],
-        'sort' => ['STDate' => ['publication_date' => Carbon::now()]]
+        'sort' => [
 
+            'STDate' => [
+                'publication_date' => Carbon::now(),
+                ],
+
+            'ACS' => 'created_at'
+        ]
     ]);
 }

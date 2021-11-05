@@ -9,16 +9,18 @@ class PostsTransformer implements Transformer
 
     public function handle($data, $param = null)
     {
-//        dd($data);
+
         $transformedData = $data->getCollection()->map( function (Post $post){
 
             return [
                 'id' => $post['id'],
-                'text' => $post['content'],
+                'title' => $post['title'],
+                'content' => $post['content'],
                 'update_at' => $post['update_at'],
-                'tags' => [ApiTransformer::transform(TagTransformer::class, $post->tags)],
-                'media' => [ApiTransformer::transform(MultimediaTransformer::class, $post->multiMedias)],
-                'filterable_fields' => Post::$filterable
+                'tags' => ApiTransformer::transform(TagTransformer::class, $post->tags),
+                'media' => ApiTransformer::transform(MultimediaTransformer::class, $post->multiMedias),
+                'filterable_fields' => Post::$filterable,
+                'publication_date' => $post['publication_date']
             ];
         });
 

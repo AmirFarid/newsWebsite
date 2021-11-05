@@ -18,10 +18,10 @@ class CreateSlidersTable extends Migration
             $table->string('name');
             $table->string('link')->nullable();
             $table->unsignedInteger('weight')->index()->default(0);
-            $table->string('media_file_name')->nullable();
-            $table->integer('media_file_size')->nullable();
-            $table->string('media_content_type')->nullable();
-            $table->timestamp('media_updated_at')->nullable();
+            $table->string('image_file_name')->nullable();
+            $table->integer('image_file_size')->nullable();
+            $table->string('image_content_type')->nullable();
+            $table->timestamp('image_updated_at')->nullable();
             $table->timestamps();
         });
     }

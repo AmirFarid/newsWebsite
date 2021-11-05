@@ -28,16 +28,6 @@ class TagController extends Controller
 
     }
 
-    public function getPostByTag(Request $request){
-
-        // TODO sort filter should be complete
-        $posts = $this->service->getPostByTag($request)->paginate($request->per_page ??= 25);
-
-        return jResponse()
-            ->transform(PostsTransformer::class , $posts)
-            ->toJson();
-    }
-
     public function create(Request $request){
         ApiValidator::validate($request , [
             'name' => 'required'
@@ -46,9 +36,27 @@ class TagController extends Controller
         $tag = $this->service->create($request);
 
         return jResponse()
-            ->setDate('id' , $tag->id)
+            ->setData(['id' => $tag->id])
             ->toJsonSuccess('Tag added successfully');
 
+    }
+
+    public function delete(Tag $tag){
+
+        $tag->delete();
+
+        return jResponse()
+            ->toJsonSuccess("Tag deleted successfully");
+    }
+
+    public function getPostByTag(Request $request){
+
+        // TODO sort filter should be complete
+        $posts = $this->service->getPostByTag($request)->paginate($request->per_page ??= 25);
+
+        return jResponse()
+            ->transform(PostsTransformer::class , $posts)
+            ->toJson();
     }
 
     public function assignTag(Request $request, Post $post){

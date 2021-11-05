@@ -32,6 +32,18 @@ class PostController extends Controller
 
     }
 
+    public function adminIndex(Request $request){
+
+
+        $posts = $this->service->adminIndex()->paginate($request->per_page ??= 25);
+
+
+        return jResponse()
+            ->transform(PostsTransformer::class, $posts, true)
+            ->toJson();
+
+    }
+
     public function create(Request $request)
     {
         ApiValidator::validate($request, [
@@ -41,6 +53,15 @@ class PostController extends Controller
         $post = $this->service->create($request);
 
         return jResponse()->setData(['id' => $post->id])->toJsonSuccess('Post added successfully');
+    }
+
+    public function update(Request $request,Post $post){
+
+        $this->service->update($request,$post);
+
+        return jResponse()
+            ->toJsonSuccess("Post updated successfully");
+
     }
 
     public function search(Request $request){
@@ -57,7 +78,7 @@ class PostController extends Controller
     }
 
 
-    public function toggleactive(Post $post)
+    public function toggleActive(Post $post)
     {
         $message = $post->toggleactive();
 

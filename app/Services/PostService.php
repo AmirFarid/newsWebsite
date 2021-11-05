@@ -13,11 +13,14 @@ class PostService
 
     public function create($request){
 
+        $time = $request->publication_date ??= Carbon::now();
+
         $post = Post::firstOrCreate(
             $request->only(['title']),
             [
                 'content' => $request->content,
-                'publication_date' => $request->publication_date ??= Carbon::now(),
+                'publication_date' => $time,
+                'created_at' => $time,
                 'active' => $request->active ??= false,
                 'mime_type' => $request->hasFile('media') ? $request->mime_type : null
             ]
@@ -46,11 +49,29 @@ class PostService
 
     }
 
+    public function adminIndex(){
+
+        return FilterFacade::filter(Post::class , null , [
+            'sort' => ['ACS' => 'created_at']
+        ]);
+
+    }
+
+
     public function search($constraint){
 
         $posts = defaultFilter(Post::class , null);
         return FilterFacade::filter(Post::class , $posts , $constraint);
 
+    }
+
+    public function update(Request $request , Post $post){
+        $post = $post->update($request->only('title','content','publication_date','created_at','mime_type'));
+        if ($request->hasFile('media'))
+            $post->media = $request->file('media');
+        $post->save();
+
+        return $post;
     }
 
     public function addComment(){

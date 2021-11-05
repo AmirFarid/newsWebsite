@@ -8,10 +8,11 @@ class SliderTransformer implements Transformer{
 
     public function handle($data, $param = null)
     {
-        $transformedData = $data->getCollection()->map(function (Slider $slider){
+        $transformedData = $data->map(function (Slider $slider){
 
             return [
 
+                'id' => $slider['id'],
                 'url' => $slider['url'],
                 'image' => $slider->image->url(),
                 'name' => $slider['name']

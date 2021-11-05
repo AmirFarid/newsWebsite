@@ -7,7 +7,7 @@ use App\Helper\Api\Transformer\PostsTransformer;
 use App\Helper\Api\Validator\ApiValidator;
 use App\Services;
 use App\Models\Category;
-use App\Services\php;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -15,7 +15,7 @@ class CategoryController extends Controller
 {
     protected $service;
 
-    public function __construct(php $service)
+    public function __construct(CategoryService $service)
     {
         $this->service = $service;
     }

@@ -54,7 +54,7 @@ return [
     'storage' => [
 
         // The Laravel storage disk to use.
-        'disk' => 'paperclip',
+        'disk' => 'public',
 
         // Per disk, the base URL where attachments are stored at. If 'url' is set for the disk, this is not required.
         'base-urls' => [
