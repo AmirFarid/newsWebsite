@@ -17,8 +17,10 @@ class PostsTransformer implements Transformer
                 'title' => $post['title'],
                 'content' => $post['content'],
                 'update_at' => $post['update_at'],
+                'active' => $post['active'],
                 'tags' => ApiTransformer::transform(TagTransformer::class, $post->tags),
                 'media' => ApiTransformer::transform(MultimediaTransformer::class, $post->multiMedias),
+                'mime_type' =>$post['mime_type'],
                 'filterable_fields' => Post::$filterable,
                 'publication_date' => $post['publication_date']
             ];

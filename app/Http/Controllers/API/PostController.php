@@ -32,6 +32,17 @@ class PostController extends Controller
 
     }
 
+    public function indexPodcast(Request $request){
+
+        $posts = $this->service->indexPodcast()->paginate($request->per_page ??= 25);
+
+
+        return jResponse()
+            ->transform(PostsTransformer::class, $posts, true)
+            ->toJson();
+
+    }
+
     public function adminIndex(Request $request){
 
 
@@ -42,6 +53,13 @@ class PostController extends Controller
             ->transform(PostsTransformer::class, $posts, true)
             ->toJson();
 
+    }
+
+    public function show(Post $post){
+
+        return jResponse()
+            ->transform(PostsTransformer::class, $post)
+            ->toJson();
     }
 
     public function create(Request $request)

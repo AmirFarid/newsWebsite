@@ -11,7 +11,7 @@ class MultimediaTransformer implements Transformer{
         return $data->map(function (Multimedia $media) {
 
             return [
-                'media' => $media->url(),
+                'url' => $media->media->url(),
                 'type' => $media['media_content_type']
             ];
 

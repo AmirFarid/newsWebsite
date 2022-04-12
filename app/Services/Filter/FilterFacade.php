@@ -17,6 +17,8 @@ class FilterFacade implements Filterable
                     return SortFacade::filter($model, $query, $value);
                 case 'search':
                     return Search::filter($model, $query, $value);
+                case 'searchNot':
+                    return SearchNot::filter($model, $query, $value);
                 default:
                     // TODO
                     abort(400);

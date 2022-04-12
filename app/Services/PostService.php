@@ -15,13 +15,14 @@ class PostService
 
         $time = $request->publication_date ??= Carbon::now();
 
+
         $post = Post::firstOrCreate(
             $request->only(['title']),
             [
                 'content' => $request->content,
                 'publication_date' => $time,
                 'created_at' => $time,
-                'active' => $request->active ??= false,
+                'active' => $request->active ? true : false,
                 'mime_type' => $request->hasFile('media') ? $request->mime_type : null
             ]
         );
@@ -45,7 +46,19 @@ class PostService
 
     public function index(){
 
-        return defaultFilter(Post::class , null);
+        $post = defaultFilter(Post::class , null);
+        return FilterFacade::filter(Post::class,$post,[
+            'searchNot' => ['mime_type' => 'podcast']
+        ]);
+
+    }
+
+    public function indexPodcast(){
+
+        $post = defaultFilter(Post::class , null);
+        return FilterFacade::filter(Post::class,$post,[
+            'search' => ['mime_type' => 'podcast']
+        ]);
 
     }
 

@@ -27,11 +27,12 @@ class CategoryService
         return $category->update($request->only('name','is_parent','category_id'));
     }
 
-    public function getPostByCategory($id){
+    public function getPostByCategory(Category $category){
 
+        // TODO try to get post by category
         $post = defaultFilter(Post::class, null);
         return FilterFacade::filter(Post::class,$post,[
-            'search' => ['category_id' => $id]
+            'search' => ['category_id' => $category->id]
         ]);
     }
 

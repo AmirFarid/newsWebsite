@@ -57,12 +57,9 @@ class CategoryController extends Controller
 
     }
 
-    public function getPostByCategory(Request $request){
-        ApiValidator::validate($request,[
-            'category_id' => 'required'
-        ]);
+    public function getPostByCategory(Request $request ,Category $category){
 
-        $post = $this->service->getPostByCategory($request->category_id)->paginate($request->per_page ??= 25);
+        $post = $this->service->getPostByCategory($category)->paginate($request->per_page ??= 25);
 
         return jResponse()
             ->transform(PostsTransformer::class, $post, true)

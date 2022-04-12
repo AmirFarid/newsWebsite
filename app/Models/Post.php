@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Helper\Api\Transformer\ApiTransformer;
+use App\Helper\Api\Transformer\MultimediaTransformer;
+use App\Services\Filter\FilterFacade;
 use http\Env\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $fillable = ['title', 'content', 'active', 'publication_date'];
-    public static $filterable = ['title', 'content', 'active', 'id','publication_date'];
+    public static $filterable = ['title', 'content', 'active', 'id','publication_date','mime_type'];
 
 
     public function toggleactive()
@@ -32,6 +35,17 @@ class Post extends Model
     function comments(){
         return $this->hasMany(Comment::class);
     }
+
+//    function getMedia(){
+//
+//        $medias = FilterFacade::filter(Multimedia::class,null,[
+//            'search' => [
+//                'post_id' => $this->id
+//            ]
+//        ]);
+//
+//        return ApiTransformer::transform(MultimediaTransformer::class, $medias->get());
+//    }
 
     function multiMedias(){
         return $this->hasMany(Multimedia::class);

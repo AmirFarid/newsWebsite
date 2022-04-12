@@ -20,11 +20,13 @@ class TagService
 
     }
 
-    public function getPostByTag(Request $request){
+    public function getPostByTag(Tag $tag){
 
-       return FilterFacade::filter(Post::class , Tag::findOrFail($request->id)->posts(),[
+       return FilterFacade::filter(Post::class , $tag->posts(),[
            'search' => ['active' => true],
-           'sort' => ['STDate' => ['publication_date' => Carbon::now()]]
+           'sort' => [
+               'STDate' => ['publication_date' => Carbon::now()],
+               'ACS' => 'created_at']
        ]);
 
     }
